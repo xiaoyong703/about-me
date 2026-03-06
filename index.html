@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Snoopy Style</title>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --snoopy-white: #FFFFFF;
+            --snoopy-black: #2D2D2D;
+            --snoopy-red: #E8453C;
+            --snoopy-yellow: #FFD93D;
+            --snoopy-blue: #6EC1E4;
+            --snoopy-green: #7CB342;
+            --bg-cream: #FFF8E7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-cream);
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(255, 217, 61, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(110, 193, 228, 0.3) 0%, transparent 50%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Cute cloud header */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .header h1 {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 3.5rem;
+            color: var(--snoopy-black);
+            text-shadow: 3px 3px 0 var(--snoopy-yellow);
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: var(--snoopy-red);
+            font-weight: 600;
+        }
+
+        /* Snoopy doghouse card */
+        .card {
+            background: var(--snoopy-white);
+            border-radius: 30px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.1),
+                0 0 0 5px var(--snoopy-red);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--snoopy-red),
+                var(--snoopy-red) 20px,
+                var(--snoopy-white) 20px,
+                var(--snoopy-white) 40px
+            );
+        }
+
+        .card h2 {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 2rem;
+            color: var(--snoopy-black);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--snoopy-black);
+        }
+
+        /* Profile section */
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--snoopy-yellow), var(--snoopy-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border: 5px solid var(--snoopy-white);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Fun facts list */
+        .fun-facts {
+            list-style: none;
+            padding: 0;
+        }
+
+        .fun-facts li {
+            padding: 15px 20px;
+            margin: 10px 0;
+            background: linear-gradient(90deg, var(--bg-cream), transparent);
+            border-left: 4px solid var(--snoopy-yellow);
+            border-radius: 0 15px 15px 0;
+            font-size: 1.1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .fun-facts li:hover {
+            transform: translateX(10px);
+        }
+
+        .fun-facts li::before {
+            content: '🐾 ';
+        }
+
+        /* Decorative elements */
+        .paw-prints {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .paw-1 { top: 10%; left: 5%; transform: rotate(-20deg); }
+        .paw-2 { top: 30%; right: 8%; transform: rotate(15deg); }
+        .paw-3 { bottom: 20%; left: 10%; transform: rotate(-10deg); }
+        .paw-4 { bottom: 40%; right: 5%; transform: rotate(25deg); }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.2rem;
+            color: var(--snoopy-black);
+        }
+
+        .footer .heart {
+            color: var(--snoopy-red);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .card {
+                padding: 25px;
+                border-radius: 20px;
+            }
+        }
+
+        /* Cute button style */
+        .cute-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--snoopy-red);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .cute-btn:hover {
+            background: var(--snoopy-black);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Zigzag divider */
+        .zigzag {
+            height: 20px;
+            background: linear-gradient(135deg, var(--bg-cream) 25%, transparent 25%) -20px 0,
+                        linear-gradient(225deg, var(--bg-cream) 25%, transparent 25%) -20px 0,
+                        linear-gradient(315deg, var(--bg-cream) 25%, transparent 25%),
+                        linear-gradient(45deg, var(--bg-cream) 25%, transparent 25%);
+            background-size: 40px 40px;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative paw prints -->
+    <div class="paw-prints paw-1">🐾</div>
+    <div class="paw-prints paw-2">🐾</div>
+    <div class="paw-prints paw-3">🐾</div>
+    <div class="paw-prints paw-4">🐾</div>
+
+    <div class="container">
+        <header class="header">
+            <h1>Hello, Friend!</h1>
+            <p class="subtitle">Welcome to my little corner of the internet ♡</p>
+        </header>
+
+        <div class="card">
+            <div class="profile">
+                <div class="avatar">🐶</div>
+                <h2>About Me</h2>
+                <p>
+                    Hi there! I'm [Your Name], and this is my cozy space on the web. 
+                    Just like Snoopy loves his doghouse, I love creating and sharing things here!
+                    Feel free to look around and get to know me better.
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>✨ Fun Facts</h2>
+            <ul class="fun-facts">
+                <li>Add your first fun fact here!</li>
+                <li>What makes you unique?</li>
+                <li>Share your favorite hobby</li>
+                <li>Tell us something surprising!</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>💭 My Favorites</h2>
+            <p>
+                <strong>Favorite Quote:</strong> "Happiness is a warm puppy." - Charles M. Schulz
+            </p>
+            <br>
+            <p>
+                <strong>What I Love:</strong> [Add your interests here - music, books, games, etc.]
+            </p>
+            <br>
+            <p>
+                <strong>Dreams:</strong> [Share your aspirations!]
+            </p>
+        </div>
+
+        <div class="card" style="text-align: center;">
+            <h2>💌 Say Hello!</h2>
+            <p>Want to connect? I'd love to hear from you!</p>
+            <a href="mailto:your@email.com" class="cute-btn">Send me a message</a>
+        </div>
+
+        <footer class="footer">
+            Made with <span class="heart">♥</span> and lots of imagination
+            <br>
+            <small>🐕 Inspired by Snoopy & the Peanuts Gang 🥜</small>
+        </footer>
+    </div>
+</body>
+</html>
