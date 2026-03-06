@@ -4,16 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me | Snoopy Style</title>
-    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
     <style>
         :root {
-            --snoopy-white: #FFFFFF;
-            --snoopy-black: #2D2D2D;
-            --snoopy-red: #E8453C;
-            --snoopy-yellow: #FFD93D;
-            --snoopy-blue: #6EC1E4;
-            --snoopy-green: #7CB342;
-            --bg-cream: #FFF8E7;
+            --golden: #D4A853;
+            --orange: #E8833A;
+            --cream: #FFF8E7;
+            --dark: #3D3225;
+            --light-gold: #F5E6C8;
         }
 
         * {
@@ -24,270 +22,437 @@
 
         body {
             font-family: 'Nunito', sans-serif;
-            background-color: var(--bg-cream);
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(255, 217, 61, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(110, 193, 228, 0.3) 0%, transparent 50%);
-            min-height: 100vh;
-            padding: 20px;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+        /* ===== INTRO SCREEN ===== */
+        .intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: url('pictures/intro-bg.png') center center / cover no-repeat;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 60px;
+            transition: all 1s ease;
         }
 
-        /* Cute cloud header */
-        .header {
-            text-align: center;
-            padding: 40px 20px;
-            position: relative;
+        .intro-screen.hidden {
+            opacity: 0;
+            transform: translateY(-100%);
+            pointer-events: none;
         }
 
-        .header h1 {
-            font-family: 'Patrick Hand', cursive;
-            font-size: 3.5rem;
-            color: var(--snoopy-black);
-            text-shadow: 3px 3px 0 var(--snoopy-yellow);
+        .intro-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 4rem;
+            color: var(--dark);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
             margin-bottom: 10px;
         }
 
-        .header .subtitle {
-            font-size: 1.2rem;
-            color: var(--snoopy-red);
-            font-weight: 600;
-        }
-
-        /* Snoopy doghouse card */
-        .card {
-            background: var(--snoopy-white);
-            border-radius: 30px;
-            padding: 40px;
-            margin: 30px 0;
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.1),
-                0 0 0 5px var(--snoopy-red);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 8px;
-            background: repeating-linear-gradient(
-                90deg,
-                var(--snoopy-red),
-                var(--snoopy-red) 20px,
-                var(--snoopy-white) 20px,
-                var(--snoopy-white) 40px
-            );
-        }
-
-        .card h2 {
-            font-family: 'Patrick Hand', cursive;
-            font-size: 2rem;
-            color: var(--snoopy-black);
-            margin-bottom: 20px;
+        .intro-subtitle {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
         }
 
-        .card p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--snoopy-black);
+        .intro-subtitle::before,
+        .intro-subtitle::after {
+            content: '';
+            width: 50px;
+            height: 1px;
+            background: var(--dark);
         }
 
-        /* Profile section */
-        .profile {
+        .intro-buttons {
             display: flex;
-            flex-direction: column;
             align-items: center;
             gap: 20px;
         }
 
-        .avatar {
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, var(--snoopy-yellow), var(--snoopy-blue));
+        .btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-skip {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-skip:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .btn-start {
+            background: var(--orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(232, 131, 58, 0.4);
+        }
+
+        .btn-start:hover {
+            background: #d4742f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(232, 131, 58, 0.5);
+        }
+
+        .or-text {
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #FEF3D0 0%, #F5E1A4 50%, #E8C97A 100%);
+            padding: 60px 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 3.5rem;
+            color: var(--dark);
+            text-align: center;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 30px 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+
+        .section-card.animate-in {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .section-card:nth-child(2) { transition-delay: 0.2s; }
+        .section-card:nth-child(3) { transition-delay: 0.4s; }
+        .section-card:nth-child(4) { transition-delay: 0.6s; }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .section-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--cream);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
-            border: 5px solid var(--snoopy-white);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            font-size: 1.5rem;
         }
 
-        /* Fun facts list */
-        .fun-facts {
+        .section-title {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.8rem;
+            color: var(--dark);
+        }
+
+        .section-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4a4039;
+        }
+
+        .section-content .highlight {
+            background: linear-gradient(120deg, #FFE082 0%, #FFD54F 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .secret-text {
+            color: var(--orange);
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .secret-text::after {
+            content: '🤫';
+            margin-left: 5px;
+        }
+
+        /* Fun Facts */
+        .fun-facts-list {
             list-style: none;
             padding: 0;
         }
 
-        .fun-facts li {
-            padding: 15px 20px;
+        .fun-facts-list li {
+            padding: 12px 20px;
             margin: 10px 0;
-            background: linear-gradient(90deg, var(--bg-cream), transparent);
-            border-left: 4px solid var(--snoopy-yellow);
-            border-radius: 0 15px 15px 0;
-            font-size: 1.1rem;
-            transition: transform 0.2s ease;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
         }
 
-        .fun-facts li:hover {
+        .fun-facts-list li:hover {
             transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.8);
         }
 
-        .fun-facts li::before {
-            content: '🐾 ';
+        .fun-facts-list li::before {
+            content: '🐾';
+            font-size: 1.2rem;
         }
 
         /* Decorative elements */
-        .paw-prints {
+        .sparkle {
             position: fixed;
-            font-size: 2rem;
-            opacity: 0.2;
             pointer-events: none;
+            animation: sparkle 1.5s ease-in-out infinite;
         }
 
-        .paw-1 { top: 10%; left: 5%; transform: rotate(-20deg); }
-        .paw-2 { top: 30%; right: 8%; transform: rotate(15deg); }
-        .paw-3 { bottom: 20%; left: 10%; transform: rotate(-10deg); }
-        .paw-4 { bottom: 40%; right: 5%; transform: rotate(25deg); }
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .floating-item {
+            position: fixed;
+            pointer-events: none;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .ufo {
+            font-size: 2rem;
+        }
+
+        .ufo-1 { top: 15%; left: 8%; animation-delay: 0s; }
+        .ufo-2 { top: 25%; right: 10%; animation-delay: 1s; }
+
+        .flower {
+            font-size: 1.5rem;
+            opacity: 0.6;
+        }
+
+        .flower-1 { top: 40%; right: 5%; animation-delay: 0.5s; }
+        .flower-2 { bottom: 30%; left: 5%; animation-delay: 1.5s; }
+        .flower-3 { bottom: 15%; right: 8%; animation-delay: 2s; }
 
         /* Footer */
         .footer {
             text-align: center;
-            padding: 30px;
+            padding: 40px 20px;
             font-family: 'Patrick Hand', cursive;
+            color: var(--dark);
             font-size: 1.2rem;
-            color: var(--snoopy-black);
         }
 
-        .footer .heart {
-            color: var(--snoopy-red);
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+        .footer .icons {
+            margin-top: 15px;
+            font-size: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
         }
 
         /* Responsive */
         @media (max-width: 600px) {
-            .header h1 {
-                font-size: 2.5rem;
-            }
-            
-            .card {
-                padding: 25px;
-                border-radius: 20px;
-            }
-        }
-
-        /* Cute button style */
-        .cute-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: var(--snoopy-red);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-family: 'Nunito', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            margin-top: 20px;
-        }
-
-        .cute-btn:hover {
-            background: var(--snoopy-black);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Zigzag divider */
-        .zigzag {
-            height: 20px;
-            background: linear-gradient(135deg, var(--bg-cream) 25%, transparent 25%) -20px 0,
-                        linear-gradient(225deg, var(--bg-cream) 25%, transparent 25%) -20px 0,
-                        linear-gradient(315deg, var(--bg-cream) 25%, transparent 25%),
-                        linear-gradient(45deg, var(--bg-cream) 25%, transparent 25%);
-            background-size: 40px 40px;
-            margin: 30px 0;
+            .intro-title { font-size: 2.8rem; }
+            .intro-buttons { flex-direction: column; gap: 15px; }
+            .or-text { display: none; }
+            .section-card { padding: 20px 25px; }
+            .page-title { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Decorative paw prints -->
-    <div class="paw-prints paw-1">🐾</div>
-    <div class="paw-prints paw-2">🐾</div>
-    <div class="paw-prints paw-3">🐾</div>
-    <div class="paw-prints paw-4">🐾</div>
+    <!-- Intro Screen -->
+    <div class="intro-screen" id="introScreen">
+        <h1 class="intro-title">About Me</h1>
+        <p class="intro-subtitle">Skip intro or have a fun time introducing myself with you!</p>
+        <div class="intro-buttons">
+            <button class="btn btn-skip" onclick="skipIntro()">
+                Skip Intro <span>→</span>
+            </button>
+            <span class="or-text">or</span>
+            <button class="btn btn-start" onclick="startIntro()">
+                Let's Start! <span>→</span>
+            </button>
+        </div>
+    </div>
 
-    <div class="container">
-        <header class="header">
-            <h1>Hello, Friend!</h1>
-            <p class="subtitle">Welcome to my little corner of the internet ♡</p>
-        </header>
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Floating decorations -->
+        <div class="floating-item ufo ufo-1">🛸</div>
+        <div class="floating-item ufo ufo-2">🛸</div>
+        <div class="floating-item flower flower-1">✿</div>
+        <div class="floating-item flower flower-2">❀</div>
+        <div class="floating-item flower flower-3">✿</div>
 
-        <div class="card">
-            <div class="profile">
-                <div class="avatar">🐶</div>
-                <h2>About Me</h2>
-                <p>
-                    Hi there! I'm [Your Name], and this is my cozy space on the web. 
-                    Just like Snoopy loves his doghouse, I love creating and sharing things here!
-                    Feel free to look around and get to know me better.
+        <div class="container">
+            <h1 class="page-title">About Me</h1>
+
+            <div class="section-card" id="section1">
+                <div class="section-header">
+                    <div class="section-icon">🐶</div>
+                    <h2 class="section-title">Who I Am</h2>
+                </div>
+                <p class="section-content">
+                    As we hang out, you'll discover cool things like the fact 
+                    <span class="highlight">I secretly have 3 extra toes</span>
+                    <span class="secret-text">shh...</span> and more fun tidbits!
                 </p>
             </div>
-        </div>
 
-        <div class="card">
-            <h2>✨ Fun Facts</h2>
-            <ul class="fun-facts">
-                <li>Add your first fun fact here!</li>
-                <li>What makes you unique?</li>
-                <li>Share your favorite hobby</li>
-                <li>Tell us something surprising!</li>
-            </ul>
-        </div>
+            <div class="section-card" id="section2">
+                <div class="section-header">
+                    <div class="section-icon">📷</div>
+                    <h2 class="section-title">My Interests</h2>
+                </div>
+                <p class="section-content">
+                    I love exploring new things, creating art, and spending time with good friends. 
+                    Whether it's a sunny day or a cozy evening, there's always something to enjoy!
+                </p>
+            </div>
 
-        <div class="card">
-            <h2>💭 My Favorites</h2>
-            <p>
-                <strong>Favorite Quote:</strong> "Happiness is a warm puppy." - Charles M. Schulz
-            </p>
-            <br>
-            <p>
-                <strong>What I Love:</strong> [Add your interests here - music, books, games, etc.]
-            </p>
-            <br>
-            <p>
-                <strong>Dreams:</strong> [Share your aspirations!]
-            </p>
-        </div>
+            <div class="section-card" id="section3">
+                <div class="section-header">
+                    <div class="section-icon">❤️</div>
+                    <h2 class="section-title">Fun Facts</h2>
+                </div>
+                <ul class="fun-facts-list">
+                    <li>Add your first fun fact here!</li>
+                    <li>What makes you unique?</li>
+                    <li>Share something surprising!</li>
+                    <li>Tell us your favorite thing</li>
+                </ul>
+            </div>
 
-        <div class="card" style="text-align: center;">
-            <h2>💌 Say Hello!</h2>
-            <p>Want to connect? I'd love to hear from you!</p>
-            <a href="mailto:your@email.com" class="cute-btn">Send me a message</a>
+            <footer class="footer">
+                Made with love and imagination ♡
+                <div class="icons">
+                    ❤️ 🎵 🐾
+                </div>
+            </footer>
         </div>
+    </main>
 
-        <footer class="footer">
-            Made with <span class="heart">♥</span> and lots of imagination
-            <br>
-            <small>🐕 Inspired by Snoopy & the Peanuts Gang 🥜</small>
-        </footer>
-    </div>
+    <script>
+        // Skip intro - immediately go to content
+        function skipIntro() {
+            const intro = document.getElementById('introScreen');
+            const main = document.getElementById('mainContent');
+            
+            intro.classList.add('hidden');
+            main.classList.add('visible');
+            
+            setTimeout(() => {
+                animateSections();
+            }, 300);
+        }
+
+        // Start intro - animated transition
+        function startIntro() {
+            const intro = document.getElementById('introScreen');
+            const main = document.getElementById('mainContent');
+            
+            // Add sparkle effect before transition
+            createSparkles();
+            
+            setTimeout(() => {
+                intro.style.transition = 'all 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                intro.classList.add('hidden');
+                main.classList.add('visible');
+                
+                setTimeout(() => {
+                    animateSections();
+                }, 500);
+            }, 800);
+        }
+
+        // Animate section cards one by one
+        function animateSections() {
+            const cards = document.querySelectorAll('.section-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('animate-in');
+                }, index * 200);
+            });
+        }
+
+        // Create sparkle effects
+        function createSparkles() {
+            const colors = ['✨', '⭐', '🌟', '💫'];
+            for (let i = 0; i < 15; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.textContent = colors[Math.floor(Math.random() * colors.length)];
+                sparkle.style.left = Math.random() * 100 + 'vw';
+                sparkle.style.top = Math.random() * 100 + 'vh';
+                sparkle.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                sparkle.style.animationDelay = Math.random() * 0.5 + 's';
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => sparkle.remove(), 1500);
+            }
+        }
+
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') startIntro();
+            if (e.key === 'Escape') skipIntro();
+        });
+    </script>
 </body>
 </html>
